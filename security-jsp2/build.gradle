@@ -33,6 +33,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+    // 2. HikariCP (Spring Boot 사용 시 보통 포함되지만, 명시적으로 추가할 때 사용합니다)
+    implementation 'com.zaxxer:HikariCP'
+
+    // JDBC 사용을 위한 라이브러리 (이미 있다면 생략 가능)
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 }
 
 tasks.named('test') {

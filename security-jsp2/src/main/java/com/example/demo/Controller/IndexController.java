@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 //@Controller - 각 메서드가 view를 리턴한다.
-@RestController
+@Controller //@RestController
 public class IndexController {
     @GetMapping({"","/"})
     public String home(){
-        log.info("home");
-        return "home";
+        log.info("index");
+        // -> /WEB-INF/views/((index)).jsp > Spring이 내부에서 수행함(개발자가 수행 X)
+        return "index"; // Springboot에서 ViewResolver
     }//end of home
     @GetMapping("/user")
     public String user(){
