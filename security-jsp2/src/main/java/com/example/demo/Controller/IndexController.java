@@ -16,7 +16,10 @@ public class IndexController {
     public String home(){
         log.info("index");
         // -> /WEB-INF/views/((index)).jsp > Spring이 내부에서 수행함(개발자가 수행 X)
-        return "index"; // Springboot에서 ViewResolver
+        // 어노테이션이 RestController에서 Controller로 변경됨
+        // @RestController = @Controller + @ResponseBody -> 문자열 포멧
+        // @Controller => 문자열이 출력으로 나갈 화면이다.
+        return "index"; //  ViewResolver(Spring boot)
     }//end of home
     @GetMapping("/user")
     public String user(){
@@ -33,4 +36,19 @@ public class IndexController {
         log.info("admin");
         return "admin";
     }//end of home
-}
+    @GetMapping("/joinForm")
+    public String joinForm() {
+        log.info("joinForm");
+        //auth/joinForm -> 응답페이지 확면 이름임
+        // yaml -> /WEB-INF/views/ 접두어
+        // 접미어  -> .jsp
+        return "auth/joinForm";
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(){
+        log.info("login-error");
+        return "loginError";
+    }
+
+}// end of IndexController

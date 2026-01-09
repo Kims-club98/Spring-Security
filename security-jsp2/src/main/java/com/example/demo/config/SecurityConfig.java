@@ -37,7 +37,8 @@ public class SecurityConfig {
                         // admin/** 경로는 ADMIN역할만 접근 가능함
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                         // 위 세가지 이외의 경우에는 모든 요청에 대해 접근 허용함(로그인 안해도 됨)
-                        .requestMatchers("*").permitAll())
+                        //.requestMatchers("*").permitAll())
+                        .anyRequest().permitAll())
                 //폼 로그인 기능 활성화
                 //기본 로그인 페이지(/login)를 Spring Security가 자동 제공
                 // 로그인 처리 URL도 기본적으로 POST/login
