@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
 <script>
-	const login = (event) => {
+	const login = (event) =>
 		alert("로그인 호출");
 		document.getElementById("f_login").submit();
 	}
