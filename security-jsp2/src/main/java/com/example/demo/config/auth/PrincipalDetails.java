@@ -40,22 +40,31 @@ public class PrincipalDetails implements UserDetails {
     public String getUsername() {
         return "";
     }
-
+    // 계정 관련 상태 체크용 매서드
+    // true: 만료 아님(로그인 가능)
+    // false: 계정 만료(로그인 불가)
     @Override
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();
     }
 
+    // true: 잠김 아님(로그인 불가)
+    // false: 잠김(로그인 불가) - 로그인 실패 5회, 관리자 잠금
     @Override
     public boolean isAccountNonLocked() {
         return UserDetails.super.isAccountNonLocked();
     }
 
+    // true: 비번 만료 아님
+    // false: 비번 만료(로그인 불가) => 90마다 변경 진행
     @Override
     public boolean isCredentialsNonExpired() {
         return UserDetails.super.isCredentialsNonExpired();
     }
 
+    // 계정 활성화/비활성화 여부(휴먼계정)
+    // true: 사용 가능(로그인 불가)
+    // false: 사용 불가능(비활성화) => 휴면계정, 이메일 미인증의 경우...
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
