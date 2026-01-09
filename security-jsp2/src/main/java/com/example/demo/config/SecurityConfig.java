@@ -48,22 +48,22 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
-    // 메모리의 사용자 계정 3개 만들기 설정
-    // DB 연결 없어도 로그인/권한 테스트 가능
+    // 메모리에 사용자 계정 3개 만들기 설정임
+    // DB연결 없이도 로그인/권한 테스트가 가능함
     @Bean
     public InMemoryUserDetailsManager userDetailsService(){
-        // admin 계정 생성(ROLE_ADIMIN)
+        //admin계정생성(ROLE_ADMIN)
         UserDetails admin = User.withUsername("admin")
                 .password("12345")
                 //.authorities("admin") //ROLE_ 접두어가 필요함 그래서 403에러 발생.
                 .roles("ADMIN") //ROLE_USER 자동으로 추가됨
                 .build();
-        // manager 계정 생성(ROLE_MANAGER)
+        //manager계정 생성(ROLE_MANAGER)
         UserDetails manager = User.withUsername("manager")
                 .password("12345")
                 .roles("MANAGER")
                 .build();
-        // user 계정 생성(ROLE_USER)
+        //user계정 생성(ROLE_USER)
         UserDetails user = User.withUsername("user")
                 .password("12345")
                 .roles("USER")
@@ -72,8 +72,8 @@ public class SecurityConfig {
     }
     //아래 코드가 없으면 user 12345로 로그인 안됨.
     //spring security 5이상에서는 비밀번호를 저장할 때 반드시 인코딩 방식이 명시되어야 함.
-    //Spring security 5+ 이상에서는 비밀번호 저장/검증에 인코더가 없는 경우 Error가 발생한다.
-    // NoOpPasswordEncoder: 평균 그대로 비교함(암호화 없이 비교)
+    //Spring Security 5+부터는 비밀번호 저장/검증 에 인코더 가 없으면 에러 발생
+    // NoOpPasswordEncorder: 평문 그대로 비교함(암호화 없이 비교)
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
