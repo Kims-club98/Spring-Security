@@ -7,11 +7,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @Log4j2
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MemberService {
     private final MemberDao memberDao;
-    public void memberInsert(User user){
+    public void memberInsert(User user) {
         memberDao.memberInsert(user);
-    }
-}// end of MemberService
+    }//end of memberInsert
+}

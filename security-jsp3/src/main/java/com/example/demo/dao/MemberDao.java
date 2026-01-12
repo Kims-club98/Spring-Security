@@ -13,20 +13,21 @@ public class MemberDao {
     private final SqlSessionTemplate sqlSessionTemplate;
 
     public void memberInsert(User user) {
-        log.info("memberInsert");
-        int result = -1;
-        result = sqlSessionTemplate.insert("memberInsert", user);
-        log.info(result);
+       log.info("memberInsert");
+       int result = -1;
+       result = sqlSessionTemplate.insert("memberInsert", user);
+       log.info(result);
     }//end of memberInsert
 
     public User login(String username) {
         log.info("login");
         User user = null;
-        try{
-            user = sqlSessionTemplate.selectOne("login",username);
-        }catch(Exception e){
+        try {
+            user = sqlSessionTemplate.selectOne("login", username);
+            log.info(user.toString());
+        }catch (Exception e){
             e.printStackTrace();
-        }// end of try-catch
+        }
         return user;
-    }// end of User login
+    }//end of login
 }
