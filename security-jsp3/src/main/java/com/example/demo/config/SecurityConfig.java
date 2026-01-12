@@ -62,7 +62,7 @@ public class SecurityConfig {
                         .requestMatchers("/user/**").authenticated()
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/joinForm","join").permitAll()// 이 패턴의 경우 권한 없이 접근이 가능하도록 한다.
+                        .requestMatchers("/joinForm","/join").permitAll()// 이 패턴의 경우 권한 없이 접근이 가능하도록 한다.
                         .anyRequest().permitAll())
                 .formLogin(form -> form
                         .loginPage("/loginForm") //사용자 정의한 로그인 페이지

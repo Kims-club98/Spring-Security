@@ -115,5 +115,4 @@ public class IndexController {
         memberService.memberInsert(user);
         return "redirect:/auth/loginForm"; // 회원가입이 되면, 이 요청을 보낸다...
     }
-
 }
