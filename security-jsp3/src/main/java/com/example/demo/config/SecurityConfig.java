@@ -79,7 +79,7 @@ public class SecurityConfig {
                         .invalidateHttpSession(true) //세션 무효화(기본값 true)
                         .deleteCookies("JSESSIONID")//쿠키 삭제
                         .permitAll()
-                );
+                )
                 .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"));
         return http.build();
     }// end of defaultSecurityFilterChain
