@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/loginForm") //사용자 정의한 로그인 페이지
                         // -> /login이 호출되면 시큐리티가 낚아채서 대신 로그인을 진행함
-                        .loginProcessingUrl("/login") //로그인 요청 처리 URL(디폴트)
+                        .loginProcessingUrl("/loginProcess") //로그인 요청 처리 URL(디폴트)
                         .defaultSuccessUrl("/") //로그인 성공 후 이동할 페이지
                         .failureUrl("/custom-login?error=true")//로그인실패시 이동할 페이지
                         .permitAll()

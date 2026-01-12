@@ -4,6 +4,7 @@ import com.example.demo.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 /*
@@ -26,20 +27,40 @@ public class PrincipalDetails implements UserDetails {
     public PrincipalDetails(User user){
         this.user = user;
     }
+    // *** 점검해야 할 Point
+    // DB 설계 시 role 문자 형식
+    // Spring Security에서 .hasRole('ADMIN'), .hasRole("USER")은 내부적으로 "ROLE_ADMIN", "ROLE_USER"
+    // 勸張: DB "ROLE_ADMIN" 형태로 저장하거나, getAuthority()에서 "ROLE"을 붙여서 반환한다.
+    // Return "ROLE_"+"user.getRole()
+    // 시큐리티 성공 시 이 사용자가 어떤 권한을 가졌는지 알아야 함
+    // 로그인 성공 시 토큰 內 권한목록을 채울 때 사용된다.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return user.getRole(); // ROLE_ADMIN, ROLE_USER, ROLE_MANAGER
+            }
+        });
+        return collect;
+    }// end of getAuthorities - 사용자가 어떤 방의 등급을 가지고 있는가?(권한여부 확인 메서드)
 
     @Override
     public String getPassword() {
-        return "";
-    }
+        return user.getPassword();
+    }// end of getPassword
 
     @Override
     public String getUsername() {
-        return "";
-    }
+        return user.getUsername();
+    }// end of getUsername
+
+    public  String getEmail(){
+            return user.getEmail();
+    }// end of getEmail
+
+
     // 계정 관련 상태 체크용 매서드
     // true: 만료 아님(로그인 가능)
     // false: 계정 만료(로그인 불가)
