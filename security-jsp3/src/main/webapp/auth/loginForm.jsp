@@ -5,6 +5,8 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <title>로그인 페이지{WEB-INF}</title>
+    <h3>ID: kiwi, Password: 123(Admin)</h3>
+    <h3>ID: apple, Password: 123(User)</h3>
     <script>
       const login = (event) => {
         //alert("로그인 호출");

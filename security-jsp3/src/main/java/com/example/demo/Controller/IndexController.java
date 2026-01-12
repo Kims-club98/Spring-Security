@@ -89,7 +89,7 @@ public class IndexController {
         return "redirect:/auth/joinForm.jsp";
     }
     // 접근 권한(403번)이 없는 경우 처리하기
-    @GetMapping("/access-denide") // Get 방식
+    @GetMapping("/access-denied") // Get 방식
     public  String accessDenied(){
         log.info("accessDenied");
         // retrun "auth/accessDenied"; //WEB-INF/views /아래서 찾음
@@ -105,7 +105,7 @@ public class IndexController {
     @PostMapping("/join")
     public String join(User user){
         log.info("join");
-        user.setRole("ROLE_USER");
+        user.setRole("ROLE_MANAGER");
         // 패스워드 암호화 하기
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
