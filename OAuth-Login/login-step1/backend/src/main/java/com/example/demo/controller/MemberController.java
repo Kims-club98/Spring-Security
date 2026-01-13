@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.GoogleProfileDto;
 import com.example.demo.dto.RedirectDto;
 import com.example.demo.model.AccessTokenVO;
 import com.example.demo.service.GoogleService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.Map;
 @Log4j2
 @RestController
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
     // GoogleService 의존성 주입
     private final GoogleService googleService; // ♣ 주의: 000=null;로 초기화 하지 말 것(NPE 뜸)
@@ -32,6 +35,7 @@ public class MemberController {
         AccessTokenVO accessTokenVO = googleService.getAccessToken(redirectDto.getCode());
         // access token은 구글 API를 호출할 수 있는 열쇠
         // 3. Access Token를 활용해서 구글 API를 호출할 수 있는 열쇠
+        GoogleProfileDto googleProfileDto = googleService.getGoogleProfile(accessTokenVO.getAccess_Token());
         // 4. 회원가입이 되어 있는지 여부를 파악해서 강제로 회원가입을 시킨다
         // 5. 우리 서비스에서 JWT 토큰을 발급하기
         // 6. Front로 내려줄 Login 결과를 구성해줘야 함.
