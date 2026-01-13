@@ -1,0 +1,18 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+logging:
+  pattern:
+    console: "${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}:%line)-%msg%n}"
+  level:
+    org.springframework.security: ${SPRING_SECURITY_LOG_LEVEL:TRACE}
+oauth:
+  google:
+    client_id: 642766501010-d4nsa0g0f342mdr1fojo4qb3p270j5lf.apps.googleusercontent.com
+    client_secret: GOCSPX-15D93D0NeQz9RkDJDPoXhB2Bide
+    redirect-uri: http://localhost:5173/oauth/kakao/redirect

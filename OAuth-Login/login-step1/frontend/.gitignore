@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+구글클라이언트 아이디.txt
 
 # Editor directories and files
 .vscode/*

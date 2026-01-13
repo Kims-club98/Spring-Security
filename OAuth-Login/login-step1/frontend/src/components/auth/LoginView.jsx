@@ -21,7 +21,7 @@ const LoginView = () => {
         console.log('구글 로그인');
         const googleUrl = "https://accounts.google.com/o/oauth2/auth"
         const googleClientId = `${import.meta.env.VITE_GOOGLE_CLIENTID}`
-        const googleRedirectUrl = "http://localhost:3000/oauth/google/redirect"
+        const googleRedirectUrl = "http://localhost:5173/oauth/google/redirect"
         const googleScope = "openid profile email"
         try {
             const auth_uri = `${googleUrl}?client_id=${googleClientId}&redirect_uri=${googleRedirectUrl}&response_type=code&scope=${googleScope}`
@@ -31,10 +31,19 @@ const LoginView = () => {
             console.error("구글 로그인 실패!!!", error);
         }
 
-
     }
     const loginK = async () => {
         console.log('카카오로그인');
+        const kakaoUri = "https://kauth.kakao.com/oauth/authorize" // kakao 인가요청코드
+        const kakaoClientId = "642766501010-d4nsa0g0f342mdr1fojo4qb3p270j5lf.apps.googleusercontent.com" // kakao의 RestAPI 키
+        const kakaoRedirectUri="http://localhost:5173/oauth/kakao/redirect" // 로그인 이후 이동해야 하는 위치 
+    
+        try{
+            const auth_uri = `${kakaoUri}?client_id=${kakaoClientId}&redirect_url=${kakaoRedirectUri}&response_type=code`
+            window.location.href = auth_uri // 해당 주소 페이지로 이동
+        }catch(error){
+            console.log("카카오 가져오기 실패",error)
+            alert("카카오 가져오기 실패!")}
     };
     const passwordView =(e) => {
         const id = e.currentTarget.id 
