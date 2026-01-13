@@ -35,12 +35,12 @@ const LoginView = () => {
     const loginK = async () => {
         console.log('카카오로그인');
         const kakaoUri = "https://kauth.kakao.com/oauth/authorize" // kakao 인가요청코드
-        const kakaoClientId = "642766501010-d4nsa0g0f342mdr1fojo4qb3p270j5lf.apps.googleusercontent.com" // kakao의 RestAPI 키
-        const kakaoRedirectUri="http://localhost:5173/oauth/kakao/redirect" // 로그인 이후 이동해야 하는 위치 
+        const kakaoClientId = "63417d3ba4e2f7342d218e5e8ed30716" // kakao의 RestAPI 키
+        const kakaoRedirectUrl="http://localhost:5173/oauth/kakao/redirect" // 로그인 이후 이동해야 하는 위치 
     
         try{
-            const auth_uri = `${kakaoUri}?client_id=${kakaoClientId}&redirect_url=${kakaoRedirectUri}&response_type=code`
-            window.location.href = auth_uri // 해당 주소 페이지로 이동
+            const auth_url = `${kakaoUri}?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUrl}&response_type=code`
+            window.location.href = auth_url // 해당 주소 페이지로 이동
         }catch(error){
             console.log("카카오 가져오기 실패",error)
             alert("카카오 가져오기 실패!")}
