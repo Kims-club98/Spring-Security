@@ -15,7 +15,7 @@ public class MemberVO {
     private String username;
     private String password;
     private  String email;
-    private String roel="RULE_USER";
+    private String role="RULE_USER";
     private String socalType; //google, kakao 등...
-    private String socalID; // uid, 제공업체가 제공하는 아이디
+    private String socalId; // uid, 제공업체가 제공하는 아이디
 }

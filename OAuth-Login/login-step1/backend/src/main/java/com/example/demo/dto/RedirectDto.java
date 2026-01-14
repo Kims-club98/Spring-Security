@@ -14,14 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RedirectDto {
     private String code;
 
-    @SpringBootApplication
-    public static class BackendApplication {
-
-        public static void main(String[] args) {
-            SpringApplication.run(BackendApplication.class, args);
-        }
-
-    }
 }
 
 
