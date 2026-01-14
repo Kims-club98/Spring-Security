@@ -1,11 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Route, Routes } from "react-router-dom"
+import BoardPage from "./components/pages/BoardPage"
 import HomePage from "./components/pages/HomePage"
-import BoardPage from "./pages/BoardPage"
+import IsTokenExpriation from "./components/auth/IsTokenExpriation"
+
 
 function App() {
-// TODO - Token의 유효시간을 Check -> 파기 혹은 유지???
-const token = localStorage.getItem('token') // 최상위존재 window는 생략가능
+
+  const token = localStorage.getItem('token') // 최상위존재 window는 생략가능
+  // TODO - Token의 유효시간을 Check -> 파기 혹은 유지???
+  const isTokenExpire = IsTokenExpriation(token)
   return (
     <>
       <Routes>
@@ -15,5 +19,4 @@ const token = localStorage.getItem('token') // 최상위존재 window는 생략�
     </>
   )
 }
-
 export default App
