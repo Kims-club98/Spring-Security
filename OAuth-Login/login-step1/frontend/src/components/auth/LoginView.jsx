@@ -19,8 +19,13 @@ const LoginView = () => {
     })
     const loginG = async() => {
         console.log('구글 로그인');
-        const googleUrl = "https://accounts.google.com/o/oauth2/auth"
-        const googleClientId = `${import.meta.env.VITE_GOOGLE_CLIENTID}`
+        const googleUrl = "https://accounts.google.com/o/oauth2/auth" 
+        const googleClientId = `${import.meta.env.VITE_GOOGLE_CLIENTID}` // Google 클라이언트 Id 변수선언
+        // ▼ Google 서버에서 요청(인가코드를 보내줘!!) 을 듣고 응답을 보내줄 URL 미리 등록을 해둠
+        // ▼ Google 서버에게 요청을 하게 되면 응답페이지 처리에 대한 제어권이 Google에게 넘어간다
+        // ▼ 그래서 미리 응답받을 수 있도록 redirecturl하게 됨
+        // ▼ 인가코드를 넘겨준다
+        // ▼ 인가코드를 받아서(5173번) 스프링 부트 서버(8000번)에 요청을 전달함(5173 > 8000)
         const googleRedirectUrl = "http://localhost:5173/oauth/google/redirect"
         const googleScope = "openid profile email"
         try {
