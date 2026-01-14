@@ -21,7 +21,11 @@ public class GoogleService {
     private String clientSecret;
     @Value("${oauth.google.redirect-uri}")
     private String redirectUri;
-
+    // google에서 발급하는 accessToken 받기
+    // google계정으로 로그인하면 인가코드를 보여줌
+    //
+    // RestClient로 처리함(spring 6)
+    // 리엑트에서 axios가 하는 역할과 비슷하다.
     public AccessTokenVO getAccessToken(String code){
         log.info(code);
         // 서버(8000번 Spring)에서 서버(Google Server)로 요처을 할때에는 RestClient로 처리를 함(Spring 6)
@@ -29,7 +33,7 @@ public class GoogleService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("clinet_id", client_id);
         params.add("client_secret", clientSecret);
-        params.add("code",code);
+        params.add("code",code); // 인가코드를 보내야 함!
         params.add("redirect_uri",redirectUri);
         params.add("grant_type", "authorization_code");
         ResponseEntity<String> res = resClient.post()

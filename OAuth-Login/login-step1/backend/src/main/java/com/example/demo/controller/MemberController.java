@@ -23,7 +23,8 @@ import java.util.Map;
 public class MemberController {
     // GoogleService 의존성 주입
     private final GoogleService googleService; // ♣ 주의: 000=null;로 초기화 하지 말 것(NPE 뜸)
-    // http://localhost:8000/member/google/doLogin
+    // http://localhost:8000/member/google/doLogin, {code: '12345678}
+    // parameter로 사용되는 @RequestBody는 리엑트가 전송하는 객체를 리터럴을 바랄 때
     @PostMapping("/google/doLogin")
     public ResponseEntity<?> doLogin(@RequestBody RedirectDto redirectDto){
         log.info("googleLogih");

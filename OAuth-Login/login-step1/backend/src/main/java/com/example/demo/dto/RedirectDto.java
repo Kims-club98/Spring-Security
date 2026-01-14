@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+// VO도 파라미터용하고 리턴타입을 분리해서 관리함...
+// VO도 파라미터용하고 리턴타입용을 분리해서 관리한다.
 
 @Data
 @NoArgsConstructor
