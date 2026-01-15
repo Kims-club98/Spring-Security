@@ -30,12 +30,12 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link to="/" className="nav-link">Home</Link>
-              <Link to="/login" className="nav-link">로그인</Link>
+              <Link to="/" className="nav-link">로그인</Link>
               <Link to="/board" className="nav-link">게시판</Link>
             </Nav>
           {isLoggedIn &&
             <>   
-              <Link to='/' className="nav-link">{email}</Link>
+              <Link to="/" className="nav-link">{email}</Link>
               <Button className="btn btn-danger" onClick={onLogout}>로그아웃</Button>
             </>
           }
