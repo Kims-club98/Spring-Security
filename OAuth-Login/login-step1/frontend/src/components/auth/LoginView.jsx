@@ -40,7 +40,7 @@ const LoginView = () => {
     const loginK = async () => {
         console.log('카카오로그인');
         const kakaoUri = "https://kauth.kakao.com/oauth/authorize" // kakao 인가요청코드
-        const kakaoClientId = "63417d3ba4e2f7342d218e5e8ed30716" // kakao의 RestAPI 키
+        const kakaoClientId = `${import.meta.env.VITE_KAKAO_CLIENTID}` // kakao의 RestAPI 키 (.env값 치환)
         const kakaoRedirectUrl="http://localhost:5173/oauth/kakao/redirect" // 로그인 이후 이동해야 하는 위치 
     
         try{
