@@ -38,13 +38,12 @@ public class MemberController {
     // http://localhost:8000/member/google/doLogin, {code: '12345678'}
     // 파라미터로 사용되는 @RequestBody은 리액트가 전송하는 객체 리터럴을 받아줌
     public ResponseEntity<?> doLogin(@RequestBody MemberLoginDto memberLoginDto){
-        MemberVo memberVo = memberService.login(memberLoginDto);
+        MemberVO memberVo = memberService.login(memberLoginDto);
         String jwtToken = null; // TODO - 토큰에 대한 Provider를 추가하기
         Map<String,Object> loginInfo = new HashMap<>();
         loginInfo.put("id",17);
         loginInfo.put("token",jwtToken); // 토큰을 넣어줘야 함
-        
-        return doLoginl;
+        return new ResponseEntity<>(loginInfo, HttpStatus.OK);
     }// end of doLogin
 
     @PostMapping("/google/doLogin")

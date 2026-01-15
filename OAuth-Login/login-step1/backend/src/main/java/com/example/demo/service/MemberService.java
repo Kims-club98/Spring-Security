@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.dto.MemberLoginDto;
 import com.example.demo.model.MemberVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -38,8 +39,16 @@ public class MemberService {
         log.info("memberVO >>",memberVO);
         int result =-1;
         memberVO.setPassword(bCryptPasswordEncoder.encode(memberVO.getPassword()));
+        result = memberDao.memberInsert(memberVO);
+        return result;
+    }
 
-        return memberDao.memberInsert(memberVO);
-
+    public MemberVO login(MemberLoginDto memDto){
+        log.info("login");
+        log.info("memDto: {}",memDto);
+        MemberVO rmemVO = null;
+        // TODO - email을 조건검색해서 조회 결과를 가져온다(목표1)
+        // TODO - 사용자가 입력한 비번과 DB에서 꺼낸 비번과 같은 지 비교해야 한다.(목표2)
+        return  rmemVO;
     }
 }
