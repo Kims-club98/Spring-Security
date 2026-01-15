@@ -60,6 +60,8 @@ public class MemberController {
         // 6. 프론트로 내려줄 로그인 결과 구성
         Map<String,Object> loginInfo = new HashMap<>();
         loginInfo.put("token",accessTokenVO.getAccess_Token());
+        loginInfo.put("email",googleProfileDto.getEmail());
+        loginInfo.put("name",googleProfileDto.getName());
         return new ResponseEntity<>(loginInfo, HttpStatus.OK);
     }//end of doLogin
     // http://localhost:8000/member/kakao/doLogin
