@@ -29,4 +29,13 @@ public class MemberService {
         memberDao.memberInsert(pmVO);
         return pmVO;
     }
+
+    public  int memberInsert (MemberVO memberVO){
+        log.info("memberInsert");
+        log.info("memberVO >>",memberVO);
+        int result =-1;
+        log.info(result);
+        memberDao.memberInsert(memberVO);
+        return result;
+    }
 }

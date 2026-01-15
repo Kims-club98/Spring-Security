@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +24,14 @@ public class MemberController {
     // GoogleService의존성 주입
     private final GoogleService googleService;//주의:null초기화 하지 않음
     private final MemberService memberService;
+    //http://localhost:8000/member/memberInstert,
+    @PostMapping("/memberInsert")
+    public ResponseEntity<?> insertMember(@RequestBody MemberVO memberVO){
+        int result =-1;
+        result = memberService.memberInsert(memberVO); // 변수는 통일시키기
+        //return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }// end of InsertMember
 
     // http://localhost:8000/member/google/doLogin, {code: '12345678'}
     // 파라미터로 사용되는 @RequestBody은 리액트가 전송하는 객체 리터럴을 받아줌
@@ -62,7 +67,7 @@ public class MemberController {
         loginInfo.put("token",accessTokenVO.getAccess_Token());
         loginInfo.put("email",googleProfileDto.getEmail());
         loginInfo.put("name",googleProfileDto.getName());
-        return new ResponseEntity<>(loginInfo, HttpStatus.OK);
+        return new ResponseEntity<>(loginInfo, HttpStatus.OK);// 200번
     }//end of doLogin
     // http://localhost:8000/member/kakao/doLogin
     @PostMapping("/kakao/doLogin")

@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginView/>} />
+        <Route path="/" element={<LoginView/>} />
         <Route path="/JoinForm" element={<JoinPage />} />
         <Route path="/oauth/google/redirect" element={<GoogleRedirect />} />
         <Route path="/oauth/kakao/redirect" element={<KakaoRedirect />} />
