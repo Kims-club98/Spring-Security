@@ -24,9 +24,10 @@ const JoinPage = () => {
   // -> http://localhost:8000/member/memberInsert
   const handleSignup = async() => {
     try{
-      const response = await axios.post(`${import.meta.env.VITE_SPRING_IP}/member/memberInster`)// 응답 선언
+      const response = await axios.post(`${import.meta.env.VITE_SPRING_IP}member/memberInsert`, formData)// 응답 선언
       // 서버에서 응답으로 받는 값이 1이면 등록 성공, 0이면 등록 실패
-      console.log(response)
+      console.log(`서버응답: ${response.data}`)
+      alert("회원가입성공!")
       navigate('/login')
     }catch(error){
       console.error("회원가입 실패!!(handleSignup 오류)",error)
@@ -43,7 +44,8 @@ const JoinPage = () => {
               <div className="input-group-text">이 름</div>
               <input
                 className="form-control"
-                name="name"
+                id="name"
+                name="username"
                 type="text"
                 placeholder="이름을 입력해주세요"
                 value={formData.username}

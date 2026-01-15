@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.GoogleProfileDto;
+import com.example.demo.dto.MemberLoginDto;
 import com.example.demo.dto.RedirectDto;
 import com.example.demo.model.AccessTokenVO;
 import com.example.demo.model.MemberVO;
@@ -26,15 +27,26 @@ public class MemberController {
     private final MemberService memberService;
     //http://localhost:8000/member/memberInstert,
     @PostMapping("/memberInsert")
-    public ResponseEntity<?> insertMember(@RequestBody MemberVO memberVO){
+    public ResponseEntity<?> memberInsert(@RequestBody MemberVO memberVO){
         int result =-1;
         result = memberService.memberInsert(memberVO); // 변수는 통일시키기
         //return new ResponseEntity<>(result, HttpStatus.CREATED);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }// end of InsertMember
-
+    // front와 backend는 서로 이중간(5173 vs 8000)
+    // backend는 세션을 사용할 수 있지만, front는 세션 사용 불가...
     // http://localhost:8000/member/google/doLogin, {code: '12345678'}
     // 파라미터로 사용되는 @RequestBody은 리액트가 전송하는 객체 리터럴을 받아줌
+    public ResponseEntity<?> doLogin(@RequestBody MemberLoginDto memberLoginDto){
+        MemberVo memberVo = memberService.login(memberLoginDto);
+        String jwtToken = null; // TODO - 토큰에 대한 Provider를 추가하기
+        Map<String,Object> loginInfo = new HashMap<>();
+        loginInfo.put("id",17);
+        loginInfo.put("token",jwtToken); // 토큰을 넣어줘야 함
+        
+        return doLoginl;
+    }// end of doLogin
+
     @PostMapping("/google/doLogin")
     public ResponseEntity<?> googleLogin(@RequestBody RedirectDto redirectDto){
         log.info("googleLogin");
@@ -58,7 +70,7 @@ public class MemberController {
                                 , googleProfileDto.getEmail(), "GOOGLE");
         }
         else{
-            log.info("이미 회원가입이 되어 있는 socialId 아이디 입니다! : "+mVO.getSocalId());
+            log.info("이미 회원가입이 되어 있는 socialId 아이디 입니다! : "+mVO.getSocialId());
         }
         // 5. 우리 서비스에서 사용할 JWT토큰 발급하기
 

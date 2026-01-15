@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Container, Nav, Navbar } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Header = () => {
   //로그인 상태 관리 - false면 로그아웃 버튼이 보이지 않음
