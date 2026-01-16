@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.JwtTokenFilter;
 import com.example.demo.dto.GoogleProfileDto;
 import com.example.demo.dto.MemberLoginDto;
 import com.example.demo.dto.RedirectDto;
@@ -26,6 +27,7 @@ public class MemberController {
     private final GoogleService googleService;//주의:null초기화 하지 않음
     private final MemberService memberService;
     private  final KakaoService kakaoService;
+    private final JwtTokenFilter jwtTokenFilter;
     //http://localhost:8000/member/memberInstert,
     @PostMapping("/memberInsert")
     public ResponseEntity<?> memberInsert(@RequestBody MemberVO memberVO){
@@ -39,11 +41,15 @@ public class MemberController {
     // http://localhost:8000/member/google/doLogin, {code: '12345678'}
     // 파라미터로 사용되는 @RequestBody은 리액트가 전송하는 객체 리터럴을 받아줌
     public ResponseEntity<?> doLogin(@RequestBody MemberLoginDto memberLoginDto){
-        MemberVO memberVo = memberService.login(memberLoginDto);
+        MemberVO memberVO = memberService.login(memberLoginDto);
+        log.info("memberVO: {}",memberVO);
         String jwtToken = null; // TODO - 토큰에 대한 Provider를 추가하기
         Map<String,Object> loginInfo = new HashMap<>();
         loginInfo.put("id",17);
         loginInfo.put("token",jwtToken); // 토큰을 넣어줘야 함
+        loginInfo.put("role", memberVO.getRole());
+        loginInfo.put("email",memberVO.getEmail());
+        loginInfo.put("username",memberVO.getUsername());
         return new ResponseEntity<>(loginInfo, HttpStatus.OK);
     }// end of doLogin
 

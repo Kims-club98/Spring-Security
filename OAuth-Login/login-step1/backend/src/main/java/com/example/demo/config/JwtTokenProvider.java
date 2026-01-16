@@ -28,7 +28,7 @@ public class JwtTokenProvider {
     public  JwtTokenProvider(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") int getExpiration) {
         this.secretKey = secretKey;
     this. expiration = expiration;
-    this.SECRET_KEY = new SecretKeySpec((Base64.getDecoder().decode(secretKey), SignatureAlgorithm.HS512.getJcaName());;
+    this.SECRET_KEY = new SecretKeySpec((Base64.getDecoder().decode(secretKey), SignatureAlgorithm.HS512.getJcaName());
     }// end ofJwtTokenProvider
     /*  - Claims 생성
             -> JWT의 payload부분(=실제 데이터)에 들어갈 내용

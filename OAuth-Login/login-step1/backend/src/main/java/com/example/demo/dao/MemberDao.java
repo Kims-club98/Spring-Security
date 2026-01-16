@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.dto.MemberLoginDto;
 import com.example.demo.model.MemberVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,6 +18,14 @@ public class MemberDao {
         MemberVO rmVO = sqlSessionTemplate.selectOne("getMemberDetail", socialId);
         return rmVO;
     }//end of getMemberDetail
+
+    public MemberVO getMemberEmail (MemberLoginDto memDto){
+        log.info("memberEmail: "+memDto);
+        MemberVO rmVO = null;
+        rmVO= sqlSessionTemplate.selectOne("getMemberEmail", memDto);
+        return rmVO;
+    }// end of getMemberEmail
+
 
     public int memberInsert(MemberVO pmVO) {
         log.info("memberInsert:"+pmVO);

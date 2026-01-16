@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { DividerDiv, DividerHr, DividerSpan, GoogleButton, KakaoButton, LoginForm, MyH1, MyInput, MyLabel, MyP, PwEye, SubmitButton } from '../styles/FormStyles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const LoginView = () => {
+    const navigate= useNavigate();
     const [tempUser, setTempUser] = useState({
         email: '',
         password:''
@@ -74,10 +76,20 @@ const LoginView = () => {
             setSubmitBtn({...submitBtn, hover:true, bgColor:'rgb(58,129,200)'})
         }
     }    
-    const loginE = () => {
-        
+    const loginE = async () => {
+        try{
+            const response = await axios.post(`${import.meta.env.VITE_SPRING_IP}member/oauth/doLogin`,tempUser)
+            console.log(response.log)
+            window.localStorage.setItem("id",response.data.id)
+            window.localStorage.setItem("token",response.data.token)
+            window.localStorage.setItem("email",response.data.email)
+            window.localStorage.setItem("username",response.data.username)    
+            navigate("/home")
+        }catch(error){
+            console.error("로그인 실패", error)
+        }
     }    
-  return (
+    return (
     <>
         <LoginForm>
         <MyH1>로그인</MyH1>
