@@ -49,7 +49,7 @@ public class MemberService {
         MemberVO rmemVO = null;
         // TODO - email을 조건검색해서 조회 결과를 가져온다(목표1)
         // TODO - 사용자가 입력한 비번과 DB에서 꺼낸 비번과 같은 지 비교해야 한다.(목표2)
-        rmemVO = memberDao.getMemberEmail();
+        rmemVO = memberDao.getMemberEmail(memDto);
         return  rmemVO;
     }
 }

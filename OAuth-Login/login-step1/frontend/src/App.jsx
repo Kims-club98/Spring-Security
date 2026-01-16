@@ -9,7 +9,8 @@ function App() {
 
   const token = localStorage.getItem('token') // 최상위존재 window는 생략가능
   // TODO - Token의 유효시간을 Check -> 파기 혹은 유지???
-  const isTokenExpire = IsTokenExpriation(token)
+  const IsTokenExpriation = IsTokenExpriation(token)
+  console.log(IsTokenExpriation) // true면 만료, false면 유효
   return (
     <>
       <Routes>

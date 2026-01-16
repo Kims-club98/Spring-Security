@@ -25,10 +25,10 @@ public class JwtTokenProvider {
     private final int expiration;
     // cf) private: 클래스 내부에서만 사용할 것(외부 클래스 접근 차단), final: 변수 값이 변하지 않음(수정 불가)
     private Key SECRET_KEY;
-    public  JwtTokenProvider(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") int getExpiration) {
-        this.secretKey = secretKey;
-    this. expiration = expiration;
-    this.SECRET_KEY = new SecretKeySpec((Base64.getDecoder().decode(secretKey), SignatureAlgorithm.HS512.getJcaName());
+    public  JwtTokenProvider(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") int expiration) {
+    this.secretKey = secretKey;
+    this.expiration = expiration;
+    this.SECRET_KEY = new SecretKeySpec((Base64.getDecoder().decode(secretKey)), SignatureAlgorithm.HS512.getJcaName());
     }// end ofJwtTokenProvider
     /*  - Claims 생성
             -> JWT의 payload부분(=실제 데이터)에 들어갈 내용
