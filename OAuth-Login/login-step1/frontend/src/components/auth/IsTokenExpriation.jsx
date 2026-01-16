@@ -36,17 +36,22 @@ const IsTokenExpiration = (token) => {
           const userAgreed = window.confirm("토큰을 연장하시겠습니까??") // 확인 및 취소
             if(userAgreed){
               setIsUserResponsed(true)
-            }
-        }
+              // TODO - Spring에서 refresh token을 사용하여 access token을 갱신처리해야한다.
+              // 재발급이 성공이 되면, localStorage에 accesstoken/refresh token을 저장처리하며
+              // is yourResponse 값을 false로 변경한다.
+              // 다시 false로 변경하는 이유는 이번에 연장 하였으니, 다음에 만료 임박 시 -> 토큰 연장 창을 다시 찍을 수 있도록 함
+              // 재발급이 실패 시 강제 logout 처리를 한다.
+              // 주기적으로 토큰 만료 여부를 체크하기 - 15초 간격
+              const interVal = setInterval(checkTokenExpiration, 1000*15)//밀리세크 단위 15초
+              return () => clearInterval(interVal); // cleanUp함수 처리
+            } // end of useAgreed
+        } // end of if(rmainTime <= 60)
       }//end of else 
-
-
-    }
+    } //end of checkTokenExpiration
     checkTokenExpiration()
-  },[])
-
+  },[token]) // end of useEffect
   return isTokenExpired
-}
+} // end of IsTokenExpiration
 
 export default IsTokenExpiration
 

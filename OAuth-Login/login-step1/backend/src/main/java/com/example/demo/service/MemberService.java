@@ -19,6 +19,11 @@ public class MemberService {
         MemberVO rmVO = memberDao.getMemberDetail(socialId);
         return rmVO;
     }
+    public MemberVO getMemberEmail(MemberLoginDto memDto) {
+        MemberVO rmVO = memberDao.getMemberEmail(memDto);
+        return rmVO;
+    }
+
 
     public MemberVO oauthCreate(String socialId, String username, String passsword
             , String email, String socialType) {
