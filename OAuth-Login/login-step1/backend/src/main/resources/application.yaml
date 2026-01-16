@@ -34,3 +34,11 @@ spring:
       max-lifetime: 1200000
       auto-commit: true
       pool-name: oraPool
+# 32글자 이상 문자열을 https://base64encode.org/에 넣고 클릭 시 아래의 결과 출력 ▼
+# c3ByaW5nYm9vdGF1dGhhY2Nlc3N0b2tlbmhlbGxvc3ByaW5nYm9vdGF1dGhhY2Nlc3N0b2tlbmhlbGxv
+# JWT서명: JWT은 토큰의 무결성 보장을 위해 서명을 사용함
+# 이 때 서버는 비밀키를 이용하여 토큰에 서명하고 클라이언트가 전달한 토큰의 서명이 올바른지 검증한다.
+
+jwt:
+  secret: c3ByaW5nYm9vdGF1dGhhY2Nlc3N0b2tlbmhlbGxvc3ByaW5nYm9vdGF1dGhhY2Nlc3N0b2tlbmhlbGxv
+  expiration: 3000
