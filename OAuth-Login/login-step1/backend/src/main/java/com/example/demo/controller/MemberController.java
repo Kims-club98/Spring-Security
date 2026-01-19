@@ -11,6 +11,7 @@ import com.example.demo.service.KakaoService;
 import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class MemberController {
     // backend는 세션을 사용할 수 있지만, front는 세션 사용 불가...
     // http://localhost:8000/member/google/doLogin, {code: '12345678'}
     // 파라미터로 사용되는 @RequestBody은 리액트가 전송하는 객체 리터럴을 받아줌
+    @PostMapping("/doLogin")
     public ResponseEntity<?> doLogin(@RequestBody MemberLoginDto memberLoginDto){
         MemberVO memberVO = memberService.login(memberLoginDto);
         log.info("memberVO: {}",memberVO);

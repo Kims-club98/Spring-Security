@@ -32,25 +32,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(configurationSource()))
-                .csrf(AbstractHttpConfigurer::disable) //csrf 비활성화(MVC에 많은 공격이 있음.)
-                //Basic 인증 비활성화
-                //Basic인증은 사용자 이름과 비밀번호를 Base64로 인코딩하여 인증값으로 활용
-                //토큰 방식은 signature부분에 암호화가 들어가므로 Basic과는 다르다
+                .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-                //세션 방식을 비활성화
-                .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //특정 url패턴에 대해서는 인증처리(Authentication객체 생성) 제외
-                .authorizeHttpRequests(a-> a
-                        .requestMatchers("/error","/favicon.ico").permitAll()
-                        .requestMatchers("/member/memberInsert", "/member/doLogin").permitAll()
-                        .requestMatchers("/member/google/**", "/member/kakao/**", "/member/oauth/**").permitAll()
-                        .anyRequest().authenticated())
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(a -> a
+                        // ★ 1. 가장 구체적이고 허용해야 하는 경로를 맨 위에 작성하세요.
+                        .requestMatchers(
+                                "/member/google/doLogin", "/member/kakao/doLogin"
+                                , "/member/doLogin", "/member/memberInsert"
+                                , "/auth/signin", "/auth/refresh"
+                        ).permitAll()
+                        // ★ 2. '모든 요청 인증'은 반드시 마지막에 위치해야 합니다.
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                        /*.requestMatchers(
-                        "/member/memberInsert",
-                        "/member/doLogin"
-                        , "/member/google/doLogin",
-                        "/member/kakao/doLogin").permitAll().anyRequest().authenticated())*/
                 .build();
     }
     @Bean

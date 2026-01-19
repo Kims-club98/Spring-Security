@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data// getter-setter를 한번에 처리 가능
 public class JwtAuthenticationResponse {
+    private Long Id;
     private String accessToken;
     private String refreshToken;
     private String role;

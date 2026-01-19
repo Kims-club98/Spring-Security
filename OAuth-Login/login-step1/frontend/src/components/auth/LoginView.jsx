@@ -8,12 +8,12 @@ const LoginView = () => {
     const [tempUser, setTempUser] = useState({
         email: '',
         password:''
-    })
+    }) // end of LoginView(input 창 옆의 눈 -> 입력창의 보임숨김 기능 [보안성 목적])
     const changeUser = (e) => {
         const id = e.currentTarget.id 
         const value = e.target.value 
         setTempUser({...tempUser, [id]: value})
-    }
+    }// end of changeUser(input창에 입력 될때마다 tempUser를 업데이트 해주는 함수)
     //동일한 input type=text를 이메일인 경우에는 입력값을 노출하고 비번일 때는 히든 처리해야 함.
     const [passwordType, setPasswordType] = useState({
         type: 'password', 
@@ -37,8 +37,7 @@ const LoginView = () => {
         } catch (error) {
             console.error("구글 로그인 실패!!!", error);
         }
-
-    }
+    }// end of loginG(구글 소셜 로그인 인가코드 요청을 위해 페이지 이동)
     const loginK = async () => {
         console.log('카카오로그인');
         const kakaoUri = "https://kauth.kakao.com/oauth/authorize" // kakao 인가요청코드
@@ -51,7 +50,7 @@ const LoginView = () => {
         }catch(error){
             console.log("카카오 가져오기 실패",error)
             alert("카카오 가져오기 실패!")}
-    };
+    }; // end of loginK(카카오 인증 서버로 인가코드를 요청함[구글과 이론은 같음])
     const passwordView =(e) => {
         const id = e.currentTarget.id 
         if(id === "password"){
@@ -78,27 +77,28 @@ const LoginView = () => {
     }    
     const loginE = async () => {
         try{
-            const response = await axios.post(`${import.meta.env.VITE_SPRING_IP}member/oauth/doLogin`,tempUser)
-            console.log(response.log)
+            const response = await axios.post(`${import.meta.env.VITE_SPRING_IP}auth/signin`,tempUser)
+            console.log("요청주소확인: "+response)
             window.localStorage.setItem("id",response.data.id)
-            window.localStorage.setItem("token",response.data.token)
-            window.localStorage.setItem("email",response.data.email)
-            window.localStorage.setItem("username",response.data.username)    
+            window.localStorage.setItem("accessToken",response.data.accessToken)
+            window.localStorage.setItem("refreshToken",response.data.refreshToken)
+            window.localStorage.setItem("username",response.data.username)
+            window.localStorage.setItem("email",response.data.email)    
             navigate("/home")
         }catch(error){
             console.error("로그인 실패", error)
         }
-    }    
+    } // end of LoginE(입력한 이메일.비밀번호를 Spring "서버에 전송" -> 인증을 요청하는 함수[성공 시 /home])   
     return (
     <>
         <LoginForm>
         <MyH1>로그인</MyH1>
         <MyLabel htmlFor="email"> 이메일     
-            <MyInput type="email" id="mem_email" name="mem_email" placeholder="이메일를 입력해주세요." 
+            <MyInput type="email" id="email" name="mem_email" placeholder="이메일를 입력해주세요." 
             onChange={(e)=>changeUser(e)}/>   
         </MyLabel>
         <MyLabel htmlFor="password"> 비밀번호
-            <MyInput type={passwordType.type} autoComplete="off" id="mem_pw" name="mem_password" placeholder="비밀번호를 입력해주세요."
+            <MyInput type={passwordType.type} autoComplete="off" id="password" name="mem_password" placeholder="비밀번호를 입력해주세요."
             onChange={(e)=>changeUser(e)}/>
             <div id="password" onClick={(e)=> {passwordView(e)}} style={{color: `${passwordType.visible?"gray":"lightgray"}`}}>
             <PwEye className="fa fa-eye fa-lg"></PwEye>
